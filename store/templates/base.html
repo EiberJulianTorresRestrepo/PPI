@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brillo Eterno</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>BRILLO ETERNO</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">INICIO</a></li>
+                <li><a href="{% url 'shop' %}">TIENDA</a></li>
+                <li><a href="{% url 'about' %}">NOSOTROS</a></li>
+                <li><a href="{% url 'questions' %}">PREGUNTAS</a></li>
+                <li><a href="{% url 'contact' %}">CONTACTO</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+    <footer>
+        <p>© 2035 por ROCHA. Creado con Django</p>
+    </footer>
+</body>
+</html>

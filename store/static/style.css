@@ -1,0 +1,233 @@
+/* General Body Styles */
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header and Navigation */
+header {
+    background-color: #fff;
+    padding: 20px 40px;
+    text-align: center;
+    border-bottom: 1px solid #eaeaea;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5em;
+    letter-spacing: 2px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0 0 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+nav ul li {
+    margin: 5px 15px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    padding: 5px 10px;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #007bff;
+}
+
+/* Main Content */
+main {
+    flex: 1;
+    padding: 0; /* Remove padding to allow hero image to be full width */
+}
+
+.hero {
+    position: relative; /* Change to relative to position text on top */
+    text-align: center;
+    color: white;
+    padding: 0; /* Remove padding */
+    background-color: transparent; /* Remove background color */
+}
+
+.hero-image-container {
+    position: relative;
+}
+
+.hero-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.hero-text {
+    position: absolute;
+    top: 50%;
+    left: 25%; /* Position to the left */
+    transform: translateY(-50%);
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #eaeaea;
+    border-radius: 8px;
+    max-width: 400px; /* Adjust max-width */
+    color: #333; /* Dark text color */
+    text-align: left; /* Align text to the left */
+}
+
+.hero-btn {
+    position: absolute;
+    bottom: 20px; /* Position button at the bottom */
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.hero h2 {
+    font-size: 2em;
+    margin: 0 0 10px 0;
+}
+
+.hero p {
+    font-size: 1.2em;
+    margin: 0 auto 20px auto;
+    max-width: 600px;
+}
+
+.btn {
+    background-color: #333;
+    color: white;
+    padding: 12px 25px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #555;
+}
+
+/* Product Grid */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.product-card {
+    border: 1px solid #eaeaea;
+    border-radius: 8px;
+    text-align: center;
+    padding: 20px;
+    transition: box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.product-card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.product-card h3 {
+    margin: 15px 0 10px 0;
+}
+
+.product-card p {
+    color: #888;
+    font-weight: bold;
+}
+
+/* Secondary Image Section */
+.secondary-image-section {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.secondary-image-section img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* Contact Form */
+.contact-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #eaeaea;
+    border-radius: 8px;
+}
+
+.contact-container form p {
+    margin-bottom: 15px;
+}
+
+.contact-container form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.contact-container form input,
+.contact-container form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Footer */
+footer {
+    background-color: #f2f2f2;
+    text-align: center;
+    padding: 20px;
+    margin-top: auto;
+    width: 100%;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header {
+        padding: 20px;
+    }
+
+    header h1 {
+        font-size: 2em;
+    }
+
+    nav ul {
+        flex-direction: column;
+    }
+
+    nav ul li {
+        margin: 10px 0;
+    }
+
+    .hero {
+        padding: 40px 20px;
+    }
+
+    .hero h2 {
+        font-size: 1.8em;
+    }
+
+    .hero p {
+        font-size: 1em;
+    }
+}

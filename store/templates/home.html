@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="hero">
+    <div class="hero-image-container">
+        <img src="{% static 'images/hero-image.jpg' %}" alt="Joyas de Brillo Eterno" class="hero-image">
+        <div class="hero-text">
+            <h2>Joyas que acompañan tus momentos más especiales</h2>
+            <p>En Brillo Eterno diseñamos anillos y aretes que reflejan elegancia, calidad y el valor de los instantes únicos. Encuentra en nuestro catálogo la joya perfecta para ti.</p>
+        </div>
+        <a href="{% url 'shop' %}" class="btn hero-btn">Shop Now</a>
+    </div>
+</section>
+
+<section class="secondary-image-section">
+    <img src="{% static 'images/second-image.jpg' %}" alt="Joyas en exhibición">
+</section>
+{% endblock %}
