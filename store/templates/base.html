@@ -17,6 +17,7 @@
                 <li><a href="{% url 'about' %}">NOSOTROS</a></li>
                 <li><a href="{% url 'questions' %}">PREGUNTAS</a></li>
                 <li><a href="{% url 'contact' %}">CONTACTO</a></li>
+                <li><a href="{% url 'cart_detail' %}">CARRITO ({{ cart|length }})</a></li>
             </ul>
         </nav>
     </header>
@@ -27,5 +28,28 @@
     <footer>
         <p>© 2035 por ROCHA. Creado con Django</p>
     </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const quantityInput = document.getElementById('id_quantity');
+            const minusBtn = document.getElementById('quantity-minus');
+            const plusBtn = document.getElementById('quantity-plus');
+
+            if (minusBtn && plusBtn && quantityInput) {
+                minusBtn.addEventListener('click', function() {
+                    let quantity = parseInt(quantityInput.value);
+                    if (quantity > 1) {
+                        quantityInput.value = quantity - 1;
+                    }
+                });
+
+                plusBtn.addEventListener('click', function() {
+                    let quantity = parseInt(quantityInput.value);
+                    if (quantity < 20) { // Corresponds to form max
+                        quantityInput.value = quantity + 1;
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>

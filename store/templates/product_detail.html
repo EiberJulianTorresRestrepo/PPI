@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block content %}
+<div class="container product-detail-container">
+    <div class="product-navigation">
+        <div class="breadcrumbs">
+            <a href="{% url 'home' %}">Inicio</a> / <a href="{% url 'shop' %}">TIENDA</a> / {{ product.name }}
+        </div>
+        <div class="prev-next">
+            {% if previous_product %}
+                <a href="{% url 'product_detail' previous_product.id previous_product.slug %}">❮ Previo</a>
+            {% endif %}
+            {% if previous_product and next_product %}
+                |
+            {% endif %}
+            {% if next_product %}
+                <a href="{% url 'product_detail' next_product.id next_product.slug %}">Próximo ❯</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="product-detail-main">
+        <div class="product-image-gallery">
+            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+        </div>
+
+        <div class="product-info">
+            <h1>{{ product.name }}</h1>
+            <p class="sku">SKU: {{ product.sku|default:"N/A" }}</p>
+            <p class="price">${{ product.price|floatformat:2 }}</p>
+            
+            <div class="color-selector">
+                <p>Color *</p>
+                <div>
+                    <span class="color-option active" style="background-color: #f1c40f;"></span>
+                    <span class="color-option" style="background-color: #95a5a6;"></span>
+                </div>
+            </div>
+
+            <form class="cart-form" action="{% url 'add_to_cart' product.id %}" method="post">
+                {% csrf_token %}
+                <div class="quantity-selector">
+                    <label>Cantidad *</label>
+                    <div class="quantity-input">
+                        <button type="button" class="quantity-btn" id="quantity-minus">-</button>
+                        <input type="text" id="id_quantity" name="quantity" value="1" min="1" max="20">
+                        <button type="button" class="quantity-btn" id="quantity-plus">+</button>
+                    </div>
+                </div>
+                {{ cart_product_form.update }}
+                <button type="submit" class="btn btn-primary">Agregar al carrito</button>
+            </form>
+
+            <div class="product-extra-info">
+                <details>
+                    <summary>INFO DEL PRODUCTO</summary>
+                    <p>{{ product.description }}</p>
+                </details>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
