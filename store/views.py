@@ -3,8 +3,13 @@ from django.views.decorators.http import require_POST
 from .models import Product
 from .forms import ContactForm, CartAddProductForm
 from .cart import Cart
+from .services import add_to_cart_service, remove_from_cart_service, get_cart_summary
 from django.core.mail import send_mail
 from django.conf import settings
+from django.http import JsonResponse
+import logging
+
+logger = logging.getLogger(__name__)
 
 # ... (home, shop, about, questions, contact views remain the same) ...
 def home(request):
@@ -46,27 +51,22 @@ def contact(request):
 
 @require_POST
 def add_to_cart(request, product_id):
-    cart = Cart(request)
-    product = get_object_or_404(Product, id=product_id)
     form = CartAddProductForm(request.POST)
     if form.is_valid():
         cd = form.cleaned_data
-        cart.add(product=product,
-                 quantity=cd['quantity'],
-                 update_quantity=cd['update'])
+        add_to_cart_service(request, product_id=product_id, quantity=cd['quantity'], update=cd['update'])
     return redirect('cart_detail')
 
 def remove_from_cart(request, product_id):
-    cart = Cart(request)
-    product = get_object_or_404(Product, id=product_id)
-    cart.remove(product)
+    remove_from_cart_service(request, product_id=product_id)
     return redirect('cart_detail')
 
 def cart_detail(request):
-    cart = Cart(request)
-    for item in cart:
+    context = get_cart_summary(request)
+    # attach update form to items
+    for item in context['items']:
         item['update_quantity_form'] = CartAddProductForm(initial={'quantity': item['quantity'], 'update': True})
-    return render(request, 'cart_detail.html', {'cart': cart})
+    return render(request, 'cart_detail.html', {'cart': context['cart']})
 
 def product_detail(request, id, slug):
     product = get_object_or_404(Product, id=id, slug=slug)
@@ -85,4 +85,40 @@ def product_detail(request, id, slug):
         'previous_product': previous_product,
         'next_product': next_product
     })
+
+def process_payment(request):
+    from .cart import Cart
+    cart = Cart(request)
+    total_amount = cart.get_total_price()
+    if request.method == 'POST':
+        logger.info('Solicitud POST recibida en process_payment')
+        payment_method = request.POST.get('payment_method')
+        amount = total_amount
+        logger.info(f'Método de pago: {payment_method}, Monto: {amount}')
+
+        # Simulate payment processing
+        if payment_method in ['credit_card', 'debit_card']:
+            card_number = request.POST.get('card_number')
+            expiry_date = request.POST.get('expiry_date')
+            cvv = request.POST.get('cvv')
+            logger.info(f'Detalles de la tarjeta: {card_number}, {expiry_date}, {cvv}')
+
+            if not (card_number and expiry_date and cvv):
+                logger.error('Faltan detalles de la tarjeta')
+                return render(request, 'payment_form.html', {
+                    'error': 'Faltan datos de la tarjeta.',
+                    'total_amount': total_amount
+                })
+
+        elif payment_method == 'paypal':
+            logger.info('Procesando pago con PayPal')
+
+        # Simulate successful payment
+        logger.info('Pago procesado exitosamente')
+        return redirect('payment_success')
+
+    return render(request, 'payment_form.html', {'total_amount': total_amount})
+
+def payment_success(request):
+    return render(request, 'payment_success.html')
 

@@ -47,7 +47,7 @@
         </table>
         <div class="cart-actions">
             <a href="{% url 'shop' %}" class="btn">Continuar Comprando</a>
-            <a href="#" class="btn btn-primary">Proceder al Pago (Simulación)</a>
+            <a href="{% url 'process_payment' %}" class="btn btn-primary">Proceder al Pago </a>
         </div>
     {% else %}
         <p>Tu carrito está vacío.</p>

@@ -57,6 +57,7 @@ main {
 
 .hero {
     position: relative; /* Change to relative to position text on top */
+    /* Mejoras visuales para la interfaz de pago */
     text-align: center;
     color: white;
     padding: 0; /* Remove padding */
@@ -437,4 +438,54 @@ main {
     .product-detail-main {
         grid-template-columns: 1fr;
     }
+}
+.payment-form {
+  background: #fff;
+  max-width: 500px;
+  margin: 30px auto;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.payment-form h2 {
+  text-align: center;
+  color: #4F81BD;
+  margin-bottom: 20px;
+}
+.form-group {
+  margin-bottom: 15px;
+}
+.form-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+.form-group.small {
+  flex: 1;
+}
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 15px;
+}
+.btn-pay {
+  background: #4F81BD;
+  color: #fff;
+  border: none;
+  padding: 12px;
+  width: 100%;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s;
+}
+.btn-pay:hover {
+  background: #3a6da0;
 }
