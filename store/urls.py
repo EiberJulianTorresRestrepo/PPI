@@ -13,4 +13,8 @@ urlpatterns = [
     path('<int:id>/<slug:slug>/', views.product_detail, name='product_detail'),
     path('process_payment/', views.process_payment, name='process_payment'),
     path('payment_success/', views.payment_success, name='payment_success'),
+    path('register/', views.register, name='register'),
+    path('login/', views.login_view, name='login'),
+    path('logout/', views.logout_view, name='logout'),
+    path('mis-compras/', views.order_history, name='order_history'),
 ]

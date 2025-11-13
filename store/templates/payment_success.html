@@ -1,7 +1,23 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h2>¡Pago realizado con éxito!</h2>
-  <p>Gracias por tu compra.</p>
-  <a href="/shop/">Volver a la tienda</a>
+  <div class="payment-form" style="max-width:400px;margin:40px auto;text-align:center;">
+    <h2 style="color:#4F81BD;">¡Pago realizado con éxito!</h2>
+    <p>Gracias por tu compra.</p>
+    {% if payment_details %}
+      <div style="margin:20px 0;padding:16px;background:#f7f9fa;border-radius:8px;">
+        <b>Método de pago:</b> {{ payment_details.tipo }}<br>
+        {% if payment_details.numero %}
+          <b>Número:</b> {{ payment_details.numero }}<br>
+        {% endif %}
+        {% if payment_details.vencimiento %}
+          <b>Vencimiento:</b> {{ payment_details.vencimiento }}<br>
+        {% endif %}
+        {% if payment_details.correo %}
+          <b>Correo PayPal:</b> {{ payment_details.correo }}<br>
+        {% endif %}
+      </div>
+    {% endif %}
+    <a href="/shop/" class="btn-pay">Volver a la tienda</a>
+  </div>
 {% endblock %}

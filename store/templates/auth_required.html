@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="payment-form" style="max-width:400px;margin:40px auto;">
+  <h2 style="text-align:center;color:#4F81BD;">Inicia sesión o regístrate</h2>
+  <p style="text-align:center;">Para continuar con el pago necesitas tener una cuenta.</p>
+  <div style="display:flex;gap:20px;justify-content:center;margin-top:30px;">
+    <a href="/login/" class="btn-pay" style="width:45%;text-align:center;">Iniciar sesión</a>
+    <a href="/register/" class="btn-pay" style="width:45%;text-align:center;background:#6fa1e6;">Registrarse</a>
+  </div>
+</div>
+{% endblock %}

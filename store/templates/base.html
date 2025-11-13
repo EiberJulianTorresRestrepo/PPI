@@ -18,6 +18,11 @@
                 <li><a href="{% url 'questions' %}">PREGUNTAS</a></li>
                 <li><a href="{% url 'contact' %}">CONTACTO</a></li>
                 <li><a href="{% url 'cart_detail' %}">CARRITO ({{ cart|length }})</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'logout' %}">CERRAR SESIÓN</a></li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">INICIAR SESIÓN</a></li>
+                {% endif %}
             </ul>
         </nav>
     </header>
