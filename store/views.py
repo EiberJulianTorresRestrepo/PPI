@@ -5,10 +5,12 @@ def order_history(request):
     orders = request.user.orders.prefetch_related('items__product').order_by('-created')
     return render(request, 'order_history.html', {'orders': orders})
 from django.contrib.auth import logout as auth_logout
+from django.contrib import messages
 # Vista para cerrar sesión
 def logout_view(request):
     auth_logout(request)
-    return redirect('home')
+    messages.success(request, 'Has cerrado sesión correctamente.')
+    return redirect('login')
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as auth_login, authenticate
 # Vista de inicio de sesión personalizada

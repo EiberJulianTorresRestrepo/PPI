@@ -26,7 +26,11 @@ SECRET_KEY = 'django-insecure-t-^^_tqrfcjc28jj-(obcia=6awrv-c72p$61fgj1+3knq9m$c
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
+ALLOWED_HOSTS = [
+    'ppi-production.up.railway.app',
+    '127.0.0.1',
+    'localhost'
+]
 
 # Application definition
 
@@ -125,8 +129,29 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+# Permitir origen Railway para CSRF
+CSRF_TRUSTED_ORIGINS = [
+    'https://ppi-production.up.railway.app',
+    'https://*.up.railway.app'
+]
+
 # Cart session ID
 CART_SESSION_ID = 'cart'
+
+# Configuración de email para recuperación de contraseña
+# En desarrollo (DEBUG=True) usa consola; en producción usa SMTP con variables de entorno
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    DEFAULT_FROM_EMAIL = 'no-reply@brillo-eterno.test'
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = os.getenv('EMAIL_HOST', 'smtp.gmail.com')
+    EMAIL_PORT = int(os.getenv('EMAIL_PORT', '587'))
+    EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', 'True').lower() == 'true'
+    EMAIL_USE_SSL = os.getenv('EMAIL_USE_SSL', 'False').lower() == 'true'
+    EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', '')
+    EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', '')
+    DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', EMAIL_HOST_USER)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

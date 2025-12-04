@@ -19,7 +19,12 @@
                 <li><a href="{% url 'contact' %}">CONTACTO</a></li>
                 <li><a href="{% url 'cart_detail' %}">CARRITO ({{ cart|length }})</a></li>
                 {% if user.is_authenticated %}
-                    <li><a href="{% url 'logout' %}">CERRAR SESIÓN</a></li>
+                    <li>
+                        <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" style="background:none;border:none;padding:0;color:inherit;cursor:pointer;">CERRAR SESIÓN</button>
+                        </form>
+                    </li>
                 {% else %}
                     <li><a href="{% url 'login' %}">INICIAR SESIÓN</a></li>
                 {% endif %}
@@ -27,6 +32,15 @@
         </nav>
     </header>
     <main>
+        {% if messages %}
+        <div class="messages" style="max-width:800px;margin:10px auto;">
+            {% for message in messages %}
+                <div class="message {{ message.tags }}" style="padding:10px;border-radius:4px;margin-bottom:8px;{% if message.tags == 'success' %}background:#e6ffed;color:#09690b;{% elif message.tags == 'error' %}background:#ffecec;color:#8a0c0c;{% else %}background:#f3f4f6;color:#111827;{% endif %}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+        {% endif %}
         {% block content %}
         {% endblock %}
     </main>

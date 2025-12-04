@@ -18,6 +18,7 @@
     {% if form.non_field_errors %}<div class="error">{{ form.non_field_errors.0 }}</div>{% endif %}
     <button type="submit" class="btn-pay" style="margin-top:10px;">Entrar</button>
   </form>
+  <p style="text-align:center;margin-top:12px;"><a href="{% url 'password_reset' %}">¿Olvidaste tu contraseña?</a></p>
   <p style="text-align:center;margin-top:18px;">¿No tienes cuenta? <a href="/register/">Regístrate</a></p>
 </div>
 {% endblock %}
